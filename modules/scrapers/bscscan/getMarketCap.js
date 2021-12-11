@@ -1,6 +1,10 @@
 const bscApiClient = require('./bscApiClient');
 const getBurntAmount = require('./getBurntAmount');
-const { contractAddress, circulatingSupply } = require('../../../config');
+const {
+  contractAddress,
+  circulatingSupply,
+  decimalPlaces,
+} = require('../../../config');
 
 module.exports = async (currentPrice) => {
   const {
@@ -14,7 +18,7 @@ module.exports = async (currentPrice) => {
   const burntAmount = await getBurntAmount();
 
   return (
-    (parseInt(result, 10) / 10 ** 18 - burntAmount) *
+    (parseInt(result, 10) / decimalPlaces - burntAmount) *
     circulatingSupply *
     currentPrice
   );
