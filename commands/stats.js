@@ -51,7 +51,7 @@ module.exports = async (message) => {
 
   const embed = {
     color: '#2cffca',
-    title: 'Titano',
+    title: 'Titano Stats',
     author: {
       name: message.author.username,
       icon_url: message.author.displayAvatarURL() || '',
