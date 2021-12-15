@@ -3,7 +3,7 @@ const { contractAddress } = require('../../../config');
 const { bscscan } = require('../links');
 
 module.exports = async () => {
-  const page = await scraper();
+  const { page, closeInstance } = await scraper();
   await page.goto(`${bscscan}/token/${contractAddress}`);
   await page.waitForSelector('#ContentPlaceHolder1_tr_tokenHolders');
   const holders = await page.evaluate(() => {
@@ -18,5 +18,6 @@ module.exports = async () => {
       10
     ).toString();
   });
+  await closeInstance();
   return holders;
 };
