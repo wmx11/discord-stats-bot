@@ -8,6 +8,10 @@ const client = new Client({
 
 client.once('ready', () => {
   console.log('bot ready');
+  client.user.setPresence({
+    activities: [{ name: 'Titano Stats', type: 'WATCHING' }],
+    status: 'online',
+  });
 });
 
 client.on('messageCreate', async (message) => {
