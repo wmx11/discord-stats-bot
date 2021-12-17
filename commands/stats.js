@@ -1,5 +1,6 @@
 const CoinGecko = require('coingecko-api');
 const { intervalToDuration } = require('date-fns');
+const { toDays } = require('duration-fns');
 
 const getHolders = require('../modules/scrapers/bscscan/getHolders');
 const getMarketCap = require('../modules/scrapers/bscscan/getMarketCap');
@@ -19,20 +20,20 @@ const {
  */
 const CoinGeckoClient = new CoinGecko();
 
-/**
- * @desc - Gets the duration since the start of Titano project
- */
-
-const getDays = () => {
-  const { days } = intervalToDuration({
-    start: new Date(startDate),
-    end: new Date(),
-  });
-  return days;
-};
-
 module.exports = async (message) => {
   const { channel } = message;
+
+  /**
+   * @desc - Gets the duration since the start of Titano project
+   */
+
+  const getDays = () => {
+    const date = intervalToDuration({
+      start: new Date(startDate),
+      end: new Date(),
+    });
+    return Math.floor(toDays(date));
+  };
 
   /**
    * @desc - Titano coin
