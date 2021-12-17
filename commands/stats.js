@@ -22,10 +22,14 @@ const CoinGeckoClient = new CoinGecko();
 /**
  * @desc - Gets the duration since the start of Titano project
  */
-const { days } = intervalToDuration({
-  start: new Date(startDate),
-  end: new Date(),
-});
+
+const getDays = () => {
+  const { days } = intervalToDuration({
+    start: new Date(startDate),
+    end: new Date(),
+  });
+  return days;
+};
 
 module.exports = async (message) => {
   const { channel } = message;
@@ -87,14 +91,14 @@ module.exports = async (message) => {
       },
       {
         name: 'Current Index',
-        value: calculateCompoundingEffect(1, perDay, days)
+        value: calculateCompoundingEffect(1, perDay, getDays())
           .toFixed(4)
           .toString(),
         inline: true,
       },
       {
         name: 'Time Elapsed',
-        value: `${days} days`,
+        value: `${getDays()} days`,
         inline: true,
       },
     ],
