@@ -9,5 +9,5 @@ module.exports = {
     perDay: 0.019174073,
   },
   commandPrefix: '!!',
-  commands: ['stats'],
+  commands: ['stats', 'holders'],
 };

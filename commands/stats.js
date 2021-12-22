@@ -9,6 +9,7 @@ const getTreasuryBalance = require('../modules/scrapers/bscscan/getTreasuryBalan
 
 const calculateCompoundingEffect = require('../utils/calculateCompoundingEffect');
 const moneyFormat = require('../utils/moneyFormat');
+const coreEmbed = require('../utils/coreEmbed');
 
 const {
   rewards: { perDay },
@@ -55,7 +56,7 @@ module.exports = async (message) => {
   const rvfBalance = await getRfvBalance(bnb.current_price.usd);
 
   const embed = {
-    color: '#2cffca',
+    ...coreEmbed,
     title: 'Titano Stats',
     author: {
       name: message.author.username,
