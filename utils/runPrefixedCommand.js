@@ -12,7 +12,7 @@ module.exports = (message) => {
     (command) =>
       content
         .split(commandPrefix)
-        .map((item) => (item ? item.toLowerCase() : ''))[1] === command
+        .map((item) => (item ? item.toLowerCase() : ''))[1].split(' ')[0] === command
   );
 
   if (!command) {
