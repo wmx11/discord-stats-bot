@@ -8,6 +8,10 @@ module.exports = {
   rewards: {
     perDay: 0.019174073,
   },
+  taxes: {
+    sell: 0.18,
+    buy: 0.13,
+  },
   commandPrefix: '!!',
-  commands: ['stats', 'holders'],
+  commands: ['stats', 'holders', 'compound'],
 };
