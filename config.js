@@ -12,6 +12,7 @@ module.exports = {
     sell: 0.18,
     buy: 0.13,
   },
+  dataFetchCacheTimeout: 5 * 1000 * 60,
   allowedChannels: ['925717779095633950', '918902350150787105'],
   moderators: ['627459940474421278', '573546139450867722', '208639946339123201'],
   blacklist: {
@@ -19,5 +20,11 @@ module.exports = {
     commands: ['897266614796447754'],
   },
   commandPrefix: '!!',
-  commands: ['stats', 'holders', 'compound', 'kiss'],
+  commands: [
+    { name: 'stats', description: 'Shows the current stats of $TITANO' },
+    { name: 'holders', description: 'Shows the current amount of people holding $TITANO' },
+    { name: 'compound', description: '$TITANO compound calculator. !!compound <$TITANO token amount> for <number of days> days' },
+    { name: 'kiss', description: 'The bot just kisses you. Thank you.' },
+    { name: 'help', description: 'Shows all available commands' },
+  ],
 };
