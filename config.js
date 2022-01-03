@@ -12,6 +12,12 @@ module.exports = {
     sell: 0.18,
     buy: 0.13,
   },
+  allowedChannels: ['925717779095633950', '918902350150787105'],
+  moderators: ['627459940474421278', '573546139450867722', '208639946339123201'],
+  blacklist: {
+    users: ['897266614796447754'],
+    commands: ['897266614796447754'],
+  },
   commandPrefix: '!!',
-  commands: ['stats', 'holders', 'compound'],
+  commands: ['stats', 'holders', 'compound', 'kiss'],
 };
