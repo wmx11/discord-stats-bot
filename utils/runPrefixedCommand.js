@@ -20,7 +20,7 @@ module.exports = (message) => {
       content
         .split(commandPrefix)
         .map((item) => (item ? item.toLowerCase() : ''))[1]
-        .split(' ')[0] === command
+        .split(' ')[0] === command.name
   );
 
   if (!command) {
@@ -43,7 +43,7 @@ module.exports = (message) => {
       return null;
     }
 
-    return require(path.resolve('./', 'commands', `${command}`))(message);
+    return require(path.resolve('./', 'commands', `${command.name}`))(message);
   } catch (error) {
     console.log(error);
   }
