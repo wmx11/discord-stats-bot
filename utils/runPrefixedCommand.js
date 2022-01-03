@@ -1,8 +1,15 @@
 const path = require('path');
-const { commandPrefix, commands } = require('../config');
+const { commandPrefix, commands, allowedChannels, blacklist } = require('../config');
 
 module.exports = (message) => {
-  const { content } = message;
+  const { content, channel, channelId, author } = message;
+
+  const isInAllowedChannel = allowedChannels.includes(channelId);
+  const isUserBlacklistedForCommands = blacklist.commands.includes(author.id);
+
+  const notAllowedInThisChannelMessage = `Bzzzzt. Please use me on <#${allowedChannels}> channel.`;
+
+  const deleteMessageTimeout = 2500;
 
   if (!content.startsWith(commandPrefix)) {
     return;
@@ -12,7 +19,8 @@ module.exports = (message) => {
     (command) =>
       content
         .split(commandPrefix)
-        .map((item) => (item ? item.toLowerCase() : ''))[1].split(' ')[0] === command
+        .map((item) => (item ? item.toLowerCase() : ''))[1]
+        .split(' ')[0] === command
   );
 
   if (!command) {
@@ -20,6 +28,21 @@ module.exports = (message) => {
   }
 
   try {
+    if (!isInAllowedChannel) {
+      channel.send(notAllowedInThisChannelMessage).then((sentMessage) => {
+        setTimeout(() => {
+          sentMessage.delete();
+          message.delete();
+        }, deleteMessageTimeout);
+      });
+      return null;
+    }
+
+    if (isUserBlacklistedForCommands) {
+      message.delete();
+      return null;
+    }
+
     return require(path.resolve('./', 'commands', `${command}`))(message);
   } catch (error) {
     console.log(error);
