@@ -1,5 +1,6 @@
 const path = require('path');
 const { commandPrefix, commands, allowedChannels, blacklist } = require('../config');
+const scanForQuestions = require('./questions/scanForQuestions');
 
 module.exports = (message) => {
   const { content, channel, channelId, author } = message;
@@ -12,7 +13,11 @@ module.exports = (message) => {
   const deleteMessageTimeout = 2500;
 
   if (!content.startsWith(commandPrefix)) {
-    return;
+    if (content.includes('lambo')) {
+      message.react('🇳');
+      message.react('🇴');
+    }
+    return scanForQuestions(message);
   }
 
   const command = commands.find(
