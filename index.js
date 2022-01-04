@@ -1,6 +1,6 @@
-const { Client, Intents } = require('discord.js');
-const runPrefixedCommand = require('./utils/runPrefixedCommand');
 require('dotenv').config();
+const { Client, Intents } = require('discord.js');
+const runCommands = require('./utils/runCommands');
 
 const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
@@ -18,7 +18,7 @@ client.on('messageCreate', async (message) => {
   if (message.author.bot) {
     return;
   }
-  runPrefixedCommand(message);
+  runCommands(message);
 });
 
 client.login(process.env.DISCORD_TOKEN);
