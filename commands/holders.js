@@ -2,7 +2,7 @@ const getHolders = require('../modules/scrapers/bscscan/getHolders');
 const cacheState = require('../utils/cacheState');
 const setCacheState = require('../utils/setCacheState');
 
-const state = cacheState;
+const state = cacheState();
 
 module.exports = async (message) => {
   const { channel } = message;

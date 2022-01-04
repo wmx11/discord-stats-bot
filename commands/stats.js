@@ -18,7 +18,7 @@ const {
   startDate
 } = require('../config');
 
-const state = cacheState;
+const state = cacheState();
 
 /**
  * @desc - Init the coinGecko client
