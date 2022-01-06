@@ -1,6 +1,7 @@
 const { allowedChannels } = require('../config');
 
-const notAllowedInThisChannelMessage = `Bzzzzt. Please use me on <#${allowedChannels}> channel.`;
+const printAllowedChannels = allowedChannels.map(channel => `<#${channel}> `);
+const notAllowedInThisChannelMessage = `Bzzzzt. Please use me on ${printAllowedChannels} channel.`;
 
 const deleteMessageTimeout = 2500;
 
