@@ -11,7 +11,7 @@ module.exports = async (message) => {
   const { channel } = message;
   const content = message.toString();
   const [, tokens, ...rest] = content.split(' ');
-  const sanitizedTokenAmount = tokens.replace(/\,/g, '');
+  const sanitizedTokenAmount = tokens ? tokens.replace(/\,/g, '') : 0;
   const tokenAmount = parseInt(sanitizedTokenAmount, 10);
   const numberOfDays = parseInt(rest[1], 10);
   const isDaysUsedInCommand = rest[2] === 'days';
