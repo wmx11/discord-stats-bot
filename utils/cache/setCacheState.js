@@ -1,4 +1,4 @@
-const { dataFetchCacheTimeout } = require('../config');
+const { dataFetchCacheTimeout } = require('../../config');
 
 module.exports = (state, dataToCache) => {
   if (!state) {
