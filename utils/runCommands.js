@@ -1,16 +1,16 @@
 const path = require('path');
-const { commandPrefix, commands, allowedChannels, blacklist } = require('../config');
+
+const isInAllowedChannel = require('./isInAllowedChannel');
+const sendNotAllowedChannelMessage = require('./sendNotAllowedChannelMessage');
+
 const scanForQuestions = require('./questions/scanForQuestions');
 
+const { commandPrefix, commands, blacklist } = require('../config');
+
 module.exports = (message) => {
-  const { content, channel, channelId, author } = message;
+  const { content, author } = message;
 
-  const isInAllowedChannel = allowedChannels.includes(channelId);
   const isUserBlacklistedForCommands = blacklist.commands.includes(author.id);
-
-  const notAllowedInThisChannelMessage = `Bzzzzt. Please use me on <#${allowedChannels}> channel.`;
-
-  const deleteMessageTimeout = 2500;
 
   if (!content.startsWith(commandPrefix)) {
     if (content.includes('lambo')) {
@@ -33,13 +33,8 @@ module.exports = (message) => {
   }
 
   try {
-    if (!isInAllowedChannel) {
-      channel.send(notAllowedInThisChannelMessage).then((sentMessage) => {
-        setTimeout(() => {
-          sentMessage.delete();
-          message.delete();
-        }, deleteMessageTimeout);
-      });
+    if (!isInAllowedChannel(message)) {
+      sendNotAllowedChannelMessage(message);
       return null;
     }
 
