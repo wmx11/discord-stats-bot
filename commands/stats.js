@@ -1,4 +1,4 @@
-const { intervalToDuration } = require('date-fns');
+const { intervalToDuration, format } = require('date-fns');
 const { toDays } = require('duration-fns');
 
 const calculateCompoundingEffect = require('../utils/calculateCompoundingEffect');
@@ -23,7 +23,7 @@ module.exports = async (message) => {
       },
     });
     
-    const { marketCap, rfv, treasury, price, holders } = stats;
+    const { marketCap, rfv, treasury, price, holders, date } = stats;
 
     /**
      * @desc - Gets the duration since the start of Titano project
@@ -87,7 +87,7 @@ module.exports = async (message) => {
         },
       ],
       footer: {
-        text: `Prices calculated using CoinGecko`,
+        text: `Prices calculated using CoinGecko\nLast updated: ${format(date, 'yyy-MM-dd HH:mm:ss (z)')}`,
       },
     };
 
