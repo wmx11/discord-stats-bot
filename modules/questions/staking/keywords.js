@@ -9,7 +9,7 @@ module.exports = [
   'where stake',
   'how stake',
   'is stake auto',
-  'is stakin auto',
+  'is staking auto',
   'does stake auto',
   'is staking automatic',
   'is titano staking automatically',
@@ -22,4 +22,7 @@ module.exports = [
   "can't stake",
   'need help staking',
   'help staking',
+  'is auto stake?',
+  'do i need to stake',
+  'where do i stake',
 ];
