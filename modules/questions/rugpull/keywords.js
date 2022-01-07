@@ -19,5 +19,9 @@ module.exports = [
   'will titano rug',
   'when titano rug',
   'can titano rug',
-  'can this be rug'
+  'can titano be a rug',
+  'can this be rug',
+  'is titano legit',
+  'titano legit',
+  'titano be legit',
 ];
