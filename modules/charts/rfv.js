@@ -4,8 +4,8 @@ const getDataset = require('../../utils/charting/getDataset');
 const sendChart = require('../../utils/charting/sendChart');
 
 module.exports = async (interaction) => {
-  const rfv = await getStats('rfv date');
-  const dataset = getDataset(rfv, 'rfv');
+  const rfv = await getStats('rfv date', { limit: 100, sort: { date: -1 } });
+  const dataset = getDataset(rfv.reverse(), 'rfv');
 
   const attachment = await createChart({
     ...dataset,
