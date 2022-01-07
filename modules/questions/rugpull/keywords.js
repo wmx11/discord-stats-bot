@@ -10,4 +10,8 @@ module.exports = [
   'how can I be sure titano is not rug',
   "how can I be sure titano is not won't rug",
   'how can I be sure titano is not will not rug',
+  'will titano rug',
+  'when titano rug',
+  'can titano rug',
+  'can this be rug'
 ];
