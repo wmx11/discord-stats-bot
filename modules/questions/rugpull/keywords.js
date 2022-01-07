@@ -1,6 +1,12 @@
 module.exports = [
   'is this a rug',
   'is this rug',
+  'this project rug',
+  'this team rug',
+  'devs rug',
+  'devs can rug',
+  'team can rug',
+  'team rug',
   'is titano rug',
   'is titano a rug',
   'is titano legit',
