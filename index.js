@@ -15,8 +15,9 @@ const sendNotAllowedChannelMessage = require('./utils/sendNotAllowedChannelMessa
 // Load DB models
 require('./models/Stats');
 
-// Load Routets
+// Load Routes
 require('./routes/databaseRoutes')(app);
+const botRoutes = require('./routes/botRoutes')(app);
 
 // Connect to the DB
 try {
@@ -35,6 +36,9 @@ client.once('ready', () => {
     activities: [{ name: 'Titano Stats', type: 'WATCHING' }],
     status: 'online',
   });
+
+  // Init bot routes
+  botRoutes(client);
 });
 
 /**
