@@ -5,7 +5,7 @@ const sendNotAllowedChannelMessage = require('./sendNotAllowedChannelMessage');
 
 const scanForQuestions = require('./questions/scanForQuestions');
 
-const { commandPrefix, commands, blacklist } = require('../config');
+const { commandPrefix, commands, blacklist, botCommands } = require('../config');
 
 module.exports = (message) => {
   const { content, author } = message;
@@ -27,6 +27,13 @@ module.exports = (message) => {
         .map((item) => (item ? item.toLowerCase() : ''))[1]
         .split(' ')[0] === command.name
   );
+
+  const hasForeignBotCommands = botCommands.includes(content.toLowerCase());
+
+  if (hasForeignBotCommands && !isInAllowedChannel(message)) {
+    message.delete();
+    return;
+  }
 
   if (!command) {
     return;
