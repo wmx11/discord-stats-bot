@@ -12,6 +12,8 @@ const runCommands = require('./utils/runCommands');
 const isInAllowedChannel = require('./utils/isInAllowedChannel');
 const sendNotAllowedChannelMessage = require('./utils/sendNotAllowedChannelMessage');
 
+const { botIds, slashCommands } = require('./config');
+
 // Load DB models
 require('./models/Stats');
 
@@ -71,7 +73,8 @@ client.on('messageCreate', async (message) => {
   if (message.author.bot) {
     if (
       !isInAllowedChannel(message) &&
-      message.interaction?.commandName === 'charts'
+      (slashCommands.includes(message.interaction?.commandName) ||
+        botIds.includes(message.author.id))
     ) {
       sendNotAllowedChannelMessage(message);
     }
@@ -85,3 +88,7 @@ client.login(process.env.DISCORD_TOKEN);
 
 // Listen to incoming requests
 app.listen(process.env.PORT);
+
+// Init watcher bots
+require('./bots/rfvWatcher');
+require('./bots/treasuryWatcher');
