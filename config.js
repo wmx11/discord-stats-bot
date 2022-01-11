@@ -22,10 +22,17 @@ module.exports = {
     '573546139450867722',
     '208639946339123201',
   ],
+  botIds: ['916354904623288350'],
+  botCommands: ['!!c', '!!price'],
+  bots: {
+    rfv: '930545807101395014',
+    treasury: '930546026572550144'
+  },
   blacklist: {
     users: ['897266614796447754'],
     commands: ['897266614796447754'],
   },
+  slashCommands: ['charts'],
   commandPrefix: '!!',
   commands: [
     { name: 'stats', description: 'Shows the current stats of $TITANO' },
@@ -38,6 +45,8 @@ module.exports = {
       description:
         '$TITANO compound calculator. !!compound <$TITANO token amount> for <number of days> days',
     },
+    { name: 'treasury', description: 'Shows $TITANO Treasury value' },
+    { name: 'rfv', description: 'Shows $TITANO RFV value' },
     { name: 'kiss', description: 'The bot just kisses you. Thank you.' },
     { name: 'help', description: 'Shows all available commands' },
   ],
