@@ -92,3 +92,5 @@ app.listen(process.env.PORT);
 // Init watcher bots
 require('./bots/rfvWatcher');
 require('./bots/treasuryWatcher');
+require('./bots/priceWatcher');
+require('./bots/holdersWatcher');
