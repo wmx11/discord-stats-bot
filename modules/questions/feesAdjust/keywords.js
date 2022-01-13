@@ -26,4 +26,5 @@ module.exports = [
   'team can increase fees to 100%',
   'team can increase the fees to 100%',
   'devs can stop us from selling',
+  'owner can increase fees',
 ];
