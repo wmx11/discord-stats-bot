@@ -26,7 +26,9 @@ module.exports = {
   botCommands: ['!!c', '!!price'],
   bots: {
     rfv: '930545807101395014',
-    treasury: '930546026572550144'
+    treasury: '930546026572550144',
+    price: '931270784289214484',
+    holders: '931270953470689310',
   },
   blacklist: {
     users: ['897266614796447754'],
