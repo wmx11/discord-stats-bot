@@ -1,4 +1,4 @@
-const bscApiClient = require('./bscApiClient');
+const BscScan = require('./BscScan');
 
 const {
   contractAddress,
@@ -6,18 +6,14 @@ const {
   decimalPlaces,
 } = require('../../../config');
 
+const bscScan = new BscScan(process.env.BSC_API_KEY);
+
 module.exports = async (currentPrice) => {
   const {
     data: { result },
-  } = await bscApiClient({
-    module: 'stats',
-    action: 'tokensupply',
-    contractaddress: contractAddress,
-  });
+  } = await bscScan.getTokenTotalSupplyByContractAddress(contractAddress);
 
   return (
-    (parseInt(result, 10) / decimalPlaces) *
-    circulatingSupply *
-    currentPrice
+    (parseInt(result, 10) / decimalPlaces) * circulatingSupply * currentPrice
   );
 };
