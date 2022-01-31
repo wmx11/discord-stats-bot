@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const sanitizeString = require('../sanitizeString');
 
 const basePath = 'modules/questions';
 const dirs = fs.readdirSync(basePath);
@@ -9,9 +10,15 @@ const questionsAndAnswers = dirs.reduce((arr, dirname) => {
     return;
   }
 
+  const keywordsArray = require(path.resolve(basePath, dirname, 'keywords'));
+
+  const sanitizedKeywords = keywordsArray.map((phrase) => {
+    return (sanitizedPhrase = sanitizeString(phrase));
+  });
+
   const questionObject = {
     type: dirname,
-    keywords: require(path.resolve(basePath, dirname, 'keywords')),
+    keywords: sanitizedKeywords,
     answer: require(path.resolve(basePath, dirname, 'answer')),
   };
 
