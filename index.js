@@ -16,6 +16,10 @@ const { botIds, slashCommands } = require('./config');
 
 // Load DB models
 require('./models/Stats');
+require('./models/Play');
+
+// Express middleware for parsin request body
+app.use(express.json());
 
 // Load Routes
 require('./routes/databaseRoutes')(app);
@@ -90,7 +94,7 @@ client.login(process.env.DISCORD_TOKEN);
 app.listen(process.env.PORT);
 
 // Init watcher bots
-require('./bots/rfvWatcher');
-require('./bots/treasuryWatcher');
-require('./bots/priceWatcher');
-require('./bots/holdersWatcher');
+// require('./bots/rfvWatcher');
+// require('./bots/treasuryWatcher');
+// require('./bots/priceWatcher');
+// require('./bots/holdersWatcher');
