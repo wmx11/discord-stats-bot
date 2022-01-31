@@ -16,6 +16,8 @@ const getTreasuryBalance = require('../modules/dataGetters/bscscan/getTreasuryBa
 const getBnbUsdtPrice = require('../modules/dataGetters/bnb/getBnbUsdtPrice');
 const getTitanoUsdPrice = require('../modules/dataGetters/titano/getTitanoUsdPrice');
 
+const { mainChannelId, botEndpoint } = require('../config');
+
 const milestones = {
   nextMilestone: 0,
   isSet: false,
@@ -53,9 +55,11 @@ module.exports = async () => {
     if (holders >= milestones.nextMilestone) {
       milestones.nextMilestone = getNextMilestone();
       const holdersAchievedMessage = encodeURI(`**TITANO has just reached ${Math.floor(holders / 1000)}k holders!** 🚀🚀🚀`);
-      await axios(`https://service-7957.something.gg/bot-hype/908073303732813880/${holdersAchievedMessage}`)
+      await axios(`${botEndpoint}/bot-say/${mainChannelId}/${holdersAchievedMessage}`)
     }
 
+    await axios(`${botEndpoint}/update-play-stats`);
+    
   } catch (error) {
     console.log(error);
   }

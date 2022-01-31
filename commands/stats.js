@@ -85,10 +85,7 @@ module.exports = async (message) => {
           value: `${getDays()} days`,
           inline: true,
         },
-      ],
-      footer: {
-        text: `Prices calculated using CoinGecko\nLast updated: ${format(date, 'yyy-MM-dd HH:mm:ss (z)')}`,
-      },
+      ]
     };
 
     fetchingMessage.delete();

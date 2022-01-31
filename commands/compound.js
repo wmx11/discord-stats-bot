@@ -1,10 +1,10 @@
-const CoinGecko = require('coingecko-api');
 const calculateCompoundingEffect = require('../utils/calculateCompoundingEffect');
 const {
   rewards: { perDay },
   taxes: { sell: sellTax }
 } = require('../config');
 const moneyFormat = require('../utils/moneyFormat');
+const getStats = require('../utils/data/getStats');
 
 module.exports = async (message) => {
   // !!compound <tokens amount> for <number of days> days
@@ -26,17 +26,14 @@ module.exports = async (message) => {
     return channel.send('Bzzzzt. Please enter "days" `!!compound <tokens amount> for <number of days> days`');
   }
 
-  /**
-   * @desc - Init the coinGecko client
-   */
-  const CoinGeckoClient = new CoinGecko();
+  const [stats] = await getStats(null, {
+    limit: 1,
+    sort: {
+      date: -1,
+    },
+  });
 
-  /**
-   * @desc - Titano coin
-   */
-  const {
-    data: { market_data: titano },
-  } = await CoinGeckoClient.coins.fetch('titano', {});
+  const { price: titanoPriceUsd } = stats;
 
   const compoundedAmount = calculateCompoundingEffect(
     tokenAmount,
@@ -44,21 +41,30 @@ module.exports = async (message) => {
     numberOfDays
   ).toFixed(4);
 
-  const priceValue = (titano.current_price.usd * compoundedAmount).toFixed(4);
-  const priceFromRewardsValue = ((compoundedAmount - tokenAmount) * titano.current_price.usd).toFixed(4);
+  const priceValue = (titanoPriceUsd * compoundedAmount).toFixed(4);
+  const priceFromRewardsValue = ((compoundedAmount - tokenAmount) * titanoPriceUsd).toFixed(4);
   const priceFromRewards = moneyFormat(priceFromRewardsValue, 6);
   const price = moneyFormat(priceValue, 6);
+  const priceAfterSellTax = priceValue * (1 - sellTax);
+  const initialUsdBalance = (tokenAmount * titanoPriceUsd);
+  const profitValue = priceAfterSellTax - initialUsdBalance;
 
   const compoundMessage = `
   **${toLocale(
     tokenAmount
     )}** $TITANO compounded over **${numberOfDays}** days will approximately yield:
+  **Your initial USD balance: ** ${moneyFormat(initialUsdBalance, 6)}
+
   **Compounding rewards: ** ${toLocale(compoundedAmount - tokenAmount)} $TITANO
   **$TITANO Total: ** ${toLocale(parseInt(compoundedAmount, 10))} $TITANO
+
   **$USD Value from rewards: ** ${priceFromRewards}
   **$USD Avg. over ${numberOfDays} days: ** ${moneyFormat(priceFromRewardsValue / numberOfDays, 6)}
   **$USD Value: ** ${price}
-  *$USD Value after ${sellTax * 100}% sell tax: ${moneyFormat(priceValue * (1 - sellTax), 6)}*
+
+  **Will you be in profit after ${numberOfDays} days?** ${ profitValue > 0 ? 'Yes! 💰' : 'No... 😓'}
+
+  *$USD Value after ${sellTax * 100}% sell tax: ${moneyFormat(priceAfterSellTax, 6)}*
   `;
 
   return channel.send(compoundMessage);

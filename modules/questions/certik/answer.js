@@ -1,3 +1,3 @@
 module.exports = `
-  CERTIK Audit is expected to be released by the end of this month.
+  The CERTIK audit should be completed by 18 February.
 `;

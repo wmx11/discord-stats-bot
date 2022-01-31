@@ -1,12 +1,18 @@
+const sanitizeString = require('../sanitizeString');
 const questionsAndAnswers = require('./questionsAndAnswers');
 
 module.exports = (message) => {
   const { content } = message;
 
-  const foundAnswer = questionsAndAnswers.reduce((answer, question) => {
-    const foundKeyword = question.keywords.find((keyword) => content.toLowerCase().includes(keyword.toLowerCase().trim()));
+  const sanitizedContent = sanitizeString(content);
 
-    if (foundKeyword) {
+  const foundAnswer = questionsAndAnswers.reduce((answer, question) => {
+
+    const foundQuestion = question.keywords.find((phrase) => {
+      return sanitizedContent.includes(phrase);
+    });
+
+    if (foundQuestion) {
       return Object.assign(answer, question);
     }
 
