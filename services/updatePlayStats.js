@@ -89,7 +89,7 @@ Prize Draw Transaction can be found here:
 
       await axios({
         method: 'POST',
-        url: `${botEndpoint}/bot-say`,
+        url: `${botEndpoint}/bot-post`,
         headers: {
           'Content-Type': 'application/json',
         },

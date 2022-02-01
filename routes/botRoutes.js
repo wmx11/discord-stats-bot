@@ -10,7 +10,7 @@ module.exports = (app) => (client) => {
     }
   });
 
-  app.post('/bot-say', (req, res) => {
+  app.post('/bot-post', (req, res) => {
     res.send('Bot has spoken in post');
     const { channelId, message } = req.body;
     if (channelId && message) {
