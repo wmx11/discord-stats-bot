@@ -4,8 +4,18 @@ const isInAllowedChannel = require('./isInAllowedChannel');
 const sendNotAllowedChannelMessage = require('./sendNotAllowedChannelMessage');
 
 const scanForQuestions = require('./questions/scanForQuestions');
+const Lambo = require('../modules/lambo/Lambo');
+const ChatWithBot = require('../modules/chatBots/ChatWithBot');
 
-const { commandPrefix, commands, blacklist, botCommands } = require('../config');
+const {
+  commandPrefix,
+  commands,
+  blacklist,
+  botCommands,
+} = require('../config');
+
+const lamboBot = new Lambo();
+const chatWithBot = new ChatWithBot(30);
 
 module.exports = (message) => {
   const { content, author } = message;
@@ -13,10 +23,8 @@ module.exports = (message) => {
   const isUserBlacklistedForCommands = blacklist.commands.includes(author.id);
 
   if (!content.startsWith(commandPrefix)) {
-    if (content.includes('lambo')) {
-      message.react('🇳');
-      message.react('🇴');
-    }
+    lamboBot.reactAndReplyToMessage(message);
+    chatWithBot.watch(message);
     return scanForQuestions(message);
   }
 
