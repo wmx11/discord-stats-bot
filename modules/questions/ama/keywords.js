@@ -1,6 +1,9 @@
 module.exports = [
   'when ama',
   'when is the ama',
+  'when is ama',
+  'what time is ama',
+  'what time is the ama',
   'where is the ama',
   'where ama',
   'wen ama',
@@ -34,4 +37,12 @@ module.exports = [
   'the address to the ama',
   'the link for the ama',
   'the address for the ama',
+  'Where can I see the ama',
+  'where is a link to the AMA',
+  'where is the link to the AMA',
+  'where is a link to AMA',
+  'where is the link to AMA',
+  'link to latest ama',
+  'where can i see the last ama',
+  'where can i see the latest ama',
 ];
